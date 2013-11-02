@@ -33,7 +33,10 @@ app.get('/', function(req, res) {
         token:capability.generate()
     });
 });
- 
-app.listen(1337);
-//app.listen(80);
+
+var port = process.env.PORT || 1337;
+app.listen(port, function() {
+  console.log("Listening on " + port);
+});
+
 console.log('Visit http://localhost:1337/ to accept inbound calls and make outbound calls!');
