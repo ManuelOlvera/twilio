@@ -1,13 +1,42 @@
 // Require the twilio and express modules
 var twilio = require('twilio'),
     express = require('express');
- 
+
+
+//Cache
+var redis = require("redis"),
+    redisClient = redis.createClient();
+
+// if you'd like to select database 3, instead of 0 (default), call
+// client.select(3, function() { /* ... */ });
+
+redisClient.on("error", function (err) {
+    console.log("Error " + err);
+});
+
+redisClient.set("string key", "string val", redis.print);
+redisClient.del();
+
 // Create an express application
 var app = express();
  
 // Render the Homepage
 app.get('/', function(req, res) { 
-    res.render('index.ejs');
+    res.render('index.ejs', {});
+});
+
+
+
+
+//Store message in cache
+app.get('/store', function(req, res) {
+
+    var key = req.query.key;
+    var message = req.query.message;
+
+    redisClient.set(key, message, redis.print);
+
+    res.render('success', { success: 'true' });
 });
 
 
@@ -25,14 +54,14 @@ app.get('/richard', function(req, res) {
         //process.env.TWILIO_ACCOUNT_SID,
         //process.env.TWILIO_AUTH_TOKEN
     );
- 
+
     // Give the capability generator permission to accept incoming
     // calls to the ID "kevin"
     capability.allowClientIncoming('richard');
  
     // Give the capability generator permission to make outbound calls,
     // Using the following TwiML app to request call handling instructions:
-    capability.allowClientOutgoing('AP6e9196835379d10360863a1f031b9b3b');
+    capability.allowClientOutgoing('AP5e129a7a9ed1593dd2d6d94bd84ad440');
  
     // Render an HTML page which contains our capability token
     res.render('richard.ejs', {
@@ -46,6 +75,7 @@ app.get('/richard', function(req, res) {
 // "mark" (this could be any string)
 app.get('/mark', function(req, res) {
  
+
     // Create an object which will generate a capability token
     // Replace these two arguments with your own account SID
     // and auth token:
@@ -55,14 +85,14 @@ app.get('/mark', function(req, res) {
         //process.env.TWILIO_ACCOUNT_SID,
         //process.env.TWILIO_AUTH_TOKEN
     );
- 
+
     // Give the capability generator permission to accept incoming
     // calls to the ID "kevin"
     capability.allowClientIncoming('mark');
  
     // Give the capability generator permission to make outbound calls,
     // Using the following TwiML app to request call handling instructions:
-    capability.allowClientOutgoing('AP6e9196835379d10360863a1f031b9b3b');
+    capability.allowClientOutgoing('APd511fb355eb9c5374e411a463bbd1a93');
  
     // Render an HTML page which contains our capability token
     res.render('mark.ejs', {
@@ -85,7 +115,7 @@ app.get('/franco', function(req, res) {
         //process.env.TWILIO_ACCOUNT_SID,
         //process.env.TWILIO_AUTH_TOKEN
     );
- 
+
     // Give the capability generator permission to accept incoming
     // calls to the ID "kevin"
     capability.allowClientIncoming('franco');

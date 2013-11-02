@@ -1,64 +1,95 @@
-<!doctype html>
-<html>
-<head>
-    <title>Twilio Client Test</title>
+<html><head>
+    <meta charset="utf-8">
+
+    <title>YouConnected</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <link href="http://yc-hackaton.herokuapp.com/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="http://yc-hackaton.herokuapp.com/stylesheets/Registercss.css" rel="stylesheet" type="text/css">
+    <link href="http://yc-hackaton.herokuapp.com/images/favicon.ico" rel="icon" type="image/ico">
+    <script src="http://yc-hackaton.herokuapp.com/javascripts/Apps/youconnected/register.js" type="text/javascript"></script>
+    <meta content="Hackathon" name="apple-mobile-web-app-title">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <link href="http://yc-hackaton.herokuapp.com/images/df_icon.png" rel="apple-touch-icon-precomposed">
+    <link href="http://yc-hackaton.herokuapp.com/images/df_icon.png" rel="apple-touch-icon-precomposed" sizes="114x114">
+    <style>
+.jq_selected  {          border-width:1px; border-style:solid;border-color:red; background-color:yellow      }  
+    </style>
+    <style>
+[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }
+    </style>
+    <style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style>
+    <style>     .jq_selected  {         border-width:1px; border-style:solid;border-color:red; background-color:yellow      }  </style>
 </head>
-<body>
-    <!-- display call status in this paragraph tag -->
-    <p>Awaiting incoming call...</p>
-    <button id="hangup">Hang Up</button>
- 
-    <br/>
- 
-    <p>
-        <input id="number" type="text" placeholder="Enter a number like +16519998888"/>
-    </p>
-    <button id="call">Call This Number</button>
- 
-    <!-- include the Twilio Client JavaScript SDK -->
-    <script src="//static.twilio.com/libs/twiliojs/1.1/twilio.min.js"></script>
- 
-    <!-- include jQuery to make DOM manipulation and event handling nicer -->
-    <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
- 
-    <!-- accept incoming calls to this client -->
-    <script type="text/javascript">
-        // Set up the Twilio "Device" (think of it as the browser's phone) with
-        // our server-generated capability token, which will be inserted by the
-        // EJS template system:
-        Twilio.Device.setup('<%= token %>');
- 
-        // Register an event handler to be called when there is an incoming
-        // call:
-        Twilio.Device.incoming(function(connection) {
-            //For demo purposed, automatically accept the call
-            connection.accept();
-            $('p').html('Call in progress...');
-        });
- 
-        // Register an event handler for when a call ends for any reason
-        Twilio.Device.disconnect(function(connection) {
-            $('p').html('Awaiting incoming call...');
-        });
- 
-        // Add a click event for the button, which will hang up the current
-        // call when clicked:
-        $('#hangup').click(function() {
-            Twilio.Device.disconnectAll();
-        });
- 
-        // Make an outbound call to the number given in the text field:
-        $('#call').on('click', function() {
- 
-            // The properties of this object will be sent as POST
-            // Parameters to URL which generates TwiML.
-            Twilio.Device.connect({
-                CallerId:'+19028001203', // Replace this value with a verified Twilio number:
-                                         // https://www.twilio.com/user/account/phone-numbers/verified
- 
-                PhoneNumber:$('#number').val() //pass in the value of the text field
-            });
-        });
-    </script>
-</body>
-</html>
+
+<body onload="onRegisterLoad()" style="zoom: 1;" crossrider_data_store_temp="{}">
+    <div class="container" id="body">
+        <div class="wrapper1">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="launchlite" id="launchlite">
+                        <div class="clear"></div>
+
+                        <div id="wrapper">
+                            <header class="no-margin opacity-one">
+                                <h1 class="haslogo hastextheading"><a href="#"><img class="logo-margin-left" src="http://res.cloudinary.com/hy4kyit2a/image/upload/df-logo.png">
+                                <div style="
+                                    font-family: Tahoma, Geneva, sans-serif !important; 
+                                    font-size: 20px;
+                                    font-weight: bold;
+                                
+                                    line-height: 1;
+">Youconnected Voice Demo</div>
+                            </a></h1>
+
+                            </header>
+
+                            <div class="login-main-dv" id="sfdcLogin">
+                                <a class="login-inner" href="/mark" target="_blank">Mark</a><br>
+                                <br>
+                            </div>
+                            <div class="login-main-dv" id="sfdcLogin">
+                                <a class="login-inner" href="/richard" target="_blank">Richard</a><br>
+                                <br>
+                            </div>
+                            <div class="login-main-dv" id="sfdcLogin">
+                                <a class="login-inner" href="/franco" target="_blank">Franco</a><br>
+                                <br>
+                            </div>
+                            <div class="opacity-one" id="sidebar">
+                                <ul id="widgets"></ul>
+                            </div>
+
+                            <div class="opacity-one" id="main">
+                                <div class="lepost">
+                                    <h2></h2>
+
+                                    <h1 class="txt-center padding-bottom-ten">
+                                    </h1>
+                                </div>
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div id="inner-footer" style="margin-left: 2em">
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="clear"></div>
+                        </div>
+
+                        <div id="launchtab"></div>
+                    </div>
+
+                    <div class="headingtop txt-center"><img alt="" src="http://yc-hackaton.herokuapp.com/images/connect-text.png"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div style="position: fixed; z-index: 99999; top: 0px; left: 0px; width: 1px; height: 1px; overflow: hidden; visibility: hidden;"><div style="margin: 10% auto 0px; width: 215px; border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; background-color: rgb(248, 248, 248); border: 8px solid rgb(160, 160, 160);"><button>Close</button></div></div></body></html>
+
+

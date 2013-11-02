@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-
-<html>
-<head>
+<html><head>
     <meta charset="utf-8">
 
     <title>YouConnected</title>
@@ -9,30 +6,25 @@
     <meta content="" name="description">
     <meta content="" name="author">
     <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-    <link href="http://yc-hackaton.herokuapp.com/stylesheets/bootstrap.min.css"
-    rel="stylesheet" type="text/css">
-    <link href="http://yc-hackaton.herokuapp.com/stylesheets/Registercss.css"
-    rel="stylesheet" type="text/css">
-    <link href="http://yc-hackaton.herokuapp.com/images/favicon.ico" rel="icon"
-    type="image/ico">
-    <script src=
-    "http://yc-hackaton.herokuapp.com/javascripts/Apps/youconnected/register.js"
-    type="text/javascript"></script>
+    <link href="http://yc-hackaton.herokuapp.com/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="http://yc-hackaton.herokuapp.com/stylesheets/Registercss.css" rel="stylesheet" type="text/css">
+    <link href="http://yc-hackaton.herokuapp.com/images/favicon.ico" rel="icon" type="image/ico">
+    <script src="http://yc-hackaton.herokuapp.com/javascripts/Apps/youconnected/register.js" type="text/javascript"></script>
     <meta content="Hackathon" name="apple-mobile-web-app-title">
     <meta content="yes" name="apple-mobile-web-app-capable">
-    <link href="http://yc-hackaton.herokuapp.com/images/df_icon.png" rel=
-    "apple-touch-icon-precomposed">
-    <link href="http://yc-hackaton.herokuapp.com/images/df_icon.png" rel=
-    "apple-touch-icon-precomposed" sizes="114x114">
+    <link href="http://yc-hackaton.herokuapp.com/images/df_icon.png" rel="apple-touch-icon-precomposed">
+    <link href="http://yc-hackaton.herokuapp.com/images/df_icon.png" rel="apple-touch-icon-precomposed" sizes="114x114">
     <style>
 .jq_selected  {          border-width:1px; border-style:solid;border-color:red; background-color:yellow      }  
     </style>
     <style>
 [touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }
     </style>
+    <style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style>
+    <style>     .jq_selected  {         border-width:1px; border-style:solid;border-color:red; background-color:yellow      }  </style>
 </head>
 
-<body onload="onRegisterLoad()" style="zoom: 1;">
+<body onload="onRegisterLoad()" style="zoom: 1;" crossrider_data_store_temp="{}">
     <div class="container" id="body">
         <div class="wrapper1">
             <div class="row-fluid">
@@ -41,15 +33,25 @@
                         <div class="clear"></div>
 
                         <div id="wrapper">
+                            <div class="login-main-dv" id="sfdcLogin">
+                                <p style="
+    font-family: Tahoma, Geneva, sans-serif !important; 
+    font-size: 15px; 
+    font-weight: normal; 
+    line-height: 3;
+">Awaiting incoming call...</p>
+                                <a id="hangup" class="login-inner" href="">Hang Up</a><br>
+                                <br>
+                            </div>
                             <header class="no-margin opacity-one">
-                                <h1 class="haslogo hastextheading"><a href=
-                                "#"><img class="logo-margin-left" src=
-                                "http://www.makepositive.com/wp-content/uploads/2013/04/mark-234x234.jpg">
+                                <h1 class="haslogo hastextheading"><a href="#"><img class="logo-margin-left" src="http://www.makepositive.com/wp-content/uploads/2013/04/mark-234x234.jpg" width="194px" height="237px">
                                 <div style="
                                     font-family: Tahoma, Geneva, sans-serif !important; 
                                     font-size: 20px;
                                     font-weight: bold;
-                                ">Mark Richards</div>
+                                
+                                    line-height: 1;
+">Mark Richards (+1 620-325-4569)</div>
                             </a></h1>
 
                             </header>
@@ -63,12 +65,9 @@
                                 <br>
                             </div>
                             <div class="login-main-dv" id="sfdcLogin">
-                                <p>Awaiting incoming call...</p>
-                                <a id="hangup" class="login-inner" href="">Hang Up</a><br>
-                                <br>
-                            </div>
-                            <div class="login-main-dv" id="sfdcLogin">
-                                <p><input id="number" type="text" placeholder="Enter a number like +16519998888"/></p>
+                                <p style="
+    padding-top: 20px;
+"><input id="number" type="text" placeholder="Enter a number like +16519998888"></p>
                                 <a id="call" class="login-inner" href="">Call This Number</a><br>
                                 <br>
                             </div>
@@ -97,8 +96,7 @@
                         <div id="launchtab"></div>
                     </div>
 
-                    <div class="headingtop txt-center"><img alt="" src=
-                    "images/connect-text.png"></div>
+                    <div class="headingtop txt-center"><img alt="" src="http://yc-hackaton.herokuapp.com/images/connect-text.png"></div>
                 </div>
             </div>
         </div>
@@ -112,6 +110,10 @@
  
     <!-- accept incoming calls to this client -->
     <script type="text/javascript">
+
+        //Twilio Number associated to the user
+        var callerId = '+16203254569';
+
         // Set up the Twilio "Device" (think of it as the browser's phone) with
         // our server-generated capability token, which will be inserted by the
         // EJS template system:
@@ -142,8 +144,8 @@
             // The properties of this object will be sent as POST
             // Parameters to URL which generates TwiML.
             Twilio.Device.connect({
-                CallerId:'+19028001203', // Replace this value with a verified Twilio number:
-                                         // https://www.twilio.com/user/account/phone-numbers/verified
+                CallerId:callerId, // Replace this value with a verified Twilio number:
+                                    // https://www.twilio.com/user/account/phone-numbers/verified
  
                 PhoneNumber:$('#number').val() //pass in the value of the text field
             });
@@ -155,10 +157,10 @@
             // The properties of this object will be sent as POST
             // Parameters to URL which generates TwiML.
             Twilio.Device.connect({
-                CallerId:'+19028001203', // Replace this value with a verified Twilio number:
-                                         // https://www.twilio.com/user/account/phone-numbers/verified
+                CallerId:callerId, // Replace this value with a verified Twilio number:
+                                    // https://www.twilio.com/user/account/phone-numbers/verified
  
-                PhoneNumber:'' //pass in the value of the text field
+                PhoneNumber:'+19188760389' //pass in the value of the text field
             });
         });
 
@@ -168,13 +170,29 @@
             // The properties of this object will be sent as POST
             // Parameters to URL which generates TwiML.
             Twilio.Device.connect({
-                CallerId:'+19028001203', // Replace this value with a verified Twilio number:
-                                         // https://www.twilio.com/user/account/phone-numbers/verified
+                CallerId:callerId, // Replace this value with a verified Twilio number:
+                                    // https://www.twilio.com/user/account/phone-numbers/verified
  
-                PhoneNumber:'' //pass in the value of the text field
+                PhoneNumber:'+19028001203' //pass in the value of the text field
             });
         });
+
+
+        // Make an outbound call to the number given in the text field:
+        $('#callmark').on('click', function() {
+ 
+            // The properties of this object will be sent as POST
+            // Parameters to URL which generates TwiML.
+            Twilio.Device.connect({
+                CallerId:callerId, // Replace this value with a verified Twilio number:
+                                    // https://www.twilio.com/user/account/phone-numbers/verified
+ 
+                PhoneNumber:'+16203254569' //pass in the value of the text field
+            });
+        });
+
+
     </script>
 
-</body>
-</html>
+
+<div style="position: fixed; z-index: 99999; top: 0px; left: 0px; width: 1px; height: 1px; overflow: hidden; visibility: hidden;"><div style="margin: 10% auto 0px; width: 215px; border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; background-color: rgb(248, 248, 248); border: 8px solid rgb(160, 160, 160);"><button>Close</button></div></div></body></html>
