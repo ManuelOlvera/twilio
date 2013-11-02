@@ -34,6 +34,6 @@ app.get('/', function(req, res) {
     });
 });
  
-//app.listen(1337);
-app.listen(80);
+app.listen(1337);
+//app.listen(80);
 console.log('Visit http://localhost:1337/ to accept inbound calls and make outbound calls!');
