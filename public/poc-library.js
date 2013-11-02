@@ -10,7 +10,10 @@
                 type: "GET",
                 success: function(data){
                     var obj = jQuery.parseJSON(data);
-                    if(confirm(obj.value)){
+                    var message = obj.value;
+                    if (obj.value == null)
+                        message = 'External call';
+                    if(confirm(message)){
                         connection.accept();
                         $('p').html('Call in progress...');
                     }else{ 
