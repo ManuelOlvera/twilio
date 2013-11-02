@@ -121,6 +121,9 @@
         // Register an event handler to be called when there is an incoming
         // call:
         Twilio.Device.incoming(function(connection) {
+
+            console.log(connection.parameters.From);
+            
             //For demo purposed, automatically accept the call
             connection.accept();
             $('p').html('Call in progress...');

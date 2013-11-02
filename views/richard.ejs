@@ -153,6 +153,8 @@
  
             // The properties of this object will be sent as POST
             // Parameters to URL which generates TwiML.
+            alert(callerId);
+            alert($('#number').val());
             Twilio.Device.connect({
                 CallerId:callerId, // Replace this value with a verified Twilio number:
                                     // https://www.twilio.com/user/account/phone-numbers/verified

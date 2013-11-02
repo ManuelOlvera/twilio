@@ -1,24 +1,28 @@
 // Require the twilio and express modules
+
 var twilio = require('twilio'),
     express = require('express');
 
 
 //Cache
-var redis = require("redis"),
-    redisClient = redis.createClient();
+var rtg   = require("url").parse('redis://redistogo:152f37f0b237d3c3596fce8ce48ed514@beardfish.redistogo.com:10769/');
+var redis = require("redis").createClient(rtg.port, rtg.hostname);
+
+redis.auth(rtg.auth.split(":")[1]);
 
 // if you'd like to select database 3, instead of 0 (default), call
 // client.select(3, function() { /* ... */ });
 
-redisClient.on("error", function (err) {
+redis.on("error", function (err) {
     console.log("Error " + err);
 });
 
-redisClient.set("string key", "string val", redis.print);
-redisClient.del();
+//redis.set("string key", "string val", redis.print);
+//redis.del();
 
 // Create an express application
 var app = express();
+app.set('view engine', 'ejs');
  
 // Render the Homepage
 app.get('/', function(req, res) { 
@@ -34,10 +38,29 @@ app.get('/store', function(req, res) {
     var key = req.query.key;
     var message = req.query.message;
 
-    redisClient.set(key, message, redis.print);
+    redis.set(key, message, redis.print);
 
-    res.render('success', { success: 'true' });
+    res.send(JSON.stringify({ success: true }));
 });
+
+//Get message from cache
+app.get('/getcontext', function(req, res) {
+
+    var key = req.query.key;
+    var message = req.query.message;
+
+    redis.get(key, function(err, reply) {
+        redis.del(key);
+        // reply is null when the key is missing
+        console.log(reply);
+        res.send(JSON.stringify({ key: key, value: reply }));
+    });
+
+
+
+});
+
+
 
 
 // Render an HTML page which contains a capability token that
