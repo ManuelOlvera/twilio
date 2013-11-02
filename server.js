@@ -22,6 +22,7 @@ redis.on("error", function (err) {
 
 // Create an express application
 var app = express();
+app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
  
 // Render the Homepage
@@ -47,7 +48,6 @@ app.get('/store', function(req, res) {
 app.get('/getcontext', function(req, res) {
 
     var key = req.query.key;
-    var message = req.query.message;
 
     redis.get(key, function(err, reply) {
         redis.del(key);
@@ -55,9 +55,6 @@ app.get('/getcontext', function(req, res) {
         console.log(reply);
         res.send(JSON.stringify({ key: key, value: reply }));
     });
-
-
-
 });
 
 
@@ -87,8 +84,15 @@ app.get('/richard', function(req, res) {
     capability.allowClientOutgoing('AP5e129a7a9ed1593dd2d6d94bd84ad440');
  
     // Render an HTML page which contains our capability token
-    res.render('richard.ejs', {
-        token:capability.generate()
+    res.render('userpage.ejs', {
+        token:capability.generate(),
+        callerid: '+19188760389',
+        name:'Richard Clark',
+        name_title:'Richard Clark (+1 918-876-0389)',
+        display_franco: '',
+        display_mark: '',
+        display_richard: 'none',
+        profile_pic: 'http://www.makepositive.com/wp-content/uploads/2013/06/Richard-Clark.jpg'
     });
 });
 
@@ -118,8 +122,15 @@ app.get('/mark', function(req, res) {
     capability.allowClientOutgoing('APd511fb355eb9c5374e411a463bbd1a93');
  
     // Render an HTML page which contains our capability token
-    res.render('mark.ejs', {
-        token:capability.generate()
+    res.render('userpage.ejs', {
+        token:capability.generate(),
+        callerid: '+16203254569',
+        name:'Mark Richards',
+        name_title:'Mark Richards (+1 620-325-4569)',
+        display_franco: '',
+        display_mark: 'none',
+        display_richard: '',
+        profile_pic: 'http://www.makepositive.com/wp-content/uploads/2013/04/mark-234x234.jpg'
     });
 });
 
@@ -148,11 +159,17 @@ app.get('/franco', function(req, res) {
     capability.allowClientOutgoing('AP6e9196835379d10360863a1f031b9b3b');
  
     // Render an HTML page which contains our capability token
-    res.render('franco.ejs', {
-        token:capability.generate()
+    res.render('userpage.ejs', {
+        token:capability.generate(),
+        callerid: '+19028001203',
+        name:'Francesco Iervolino',
+        name_title:'Francesco Iervolino (+1 902-800-1203)',
+        display_franco: 'none',
+        display_mark: '',
+        display_richard: '',
+        profile_pic: 'https://si0.twimg.com/profile_images/2271495075/oyz5kp437xs9qmpvc9hy.png'
     });
 });
-
 
 
 var port = process.env.PORT || 1337;
