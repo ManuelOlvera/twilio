@@ -92,7 +92,7 @@ app.get('/richard', function(req, res) {
         display_franco: '',
         display_mark: '',
         display_richard: 'none',
-        profile_pic: 'http://www.makepositive.com/wp-content/uploads/2013/06/Richard-Clark.jpg'
+        profile_pic: '/images/richard.jpg'
     });
 });
 
@@ -130,7 +130,7 @@ app.get('/mark', function(req, res) {
         display_franco: '',
         display_mark: 'none',
         display_richard: '',
-        profile_pic: 'http://www.makepositive.com/wp-content/uploads/2013/04/mark-234x234.jpg'
+        profile_pic: '/images/mark.jpg'
     });
 });
 
@@ -167,7 +167,7 @@ app.get('/franco', function(req, res) {
         display_franco: 'none',
         display_mark: '',
         display_richard: '',
-        profile_pic: 'https://si0.twimg.com/profile_images/2271495075/oyz5kp437xs9qmpvc9hy.png'
+        profile_pic: '/images/franco.jpg'
     });
 });
 
