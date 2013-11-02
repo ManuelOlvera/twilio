@@ -13,14 +13,33 @@
                     var message = obj.value;
                     if (obj.value == null)
                         message = 'External call';
-                    if(confirm(message)){
+
+                    $('#dialogtext').html(message);
+                    
+                    $('#accept').click(function(){
                         connection.accept();
                         $('p').html('Call in progress...');
-                    }else{ 
+                        $('#dialogtext').html(message);
+                    });
+                    $('#deny').click(function(){
                         connection.reject();
                         $('p').html('Awaiting incoming call...');
-                        alert('Refused call. I\'m going to log on chatter the activity.');
-                    }
+                        $('#dialogtext').html(message);
+                    });
+                    
+                    $('#modal').show();
+
+                    /*
+                     * jQuery UI Dialog: Modal Dialog with Buttons
+                     * http://salman-w.blogspot.com/2013/05/jquery-ui-dialog-examples.html
+                     */
+                    $('#modal').reveal({ // The item which will be opened with reveal
+                        animation: 'fade',                   // fade, fadeAndPop, none
+                        animationspeed: 600,                       // how fast animtions are
+                        closeonbackgroundclick: true,              // if you click background will modal close?
+                        dismissmodalclass: 'close'    // the class of a button or element that will close an open modal
+                    });
+
                 }
             });
         });
@@ -101,6 +120,11 @@
                 PhoneNumber:'+16203254569' //pass in the value of the text field
             });
         });
+
+
+
+
+
 
         function getMessage(){
             var now = new Date();
