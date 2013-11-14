@@ -172,6 +172,31 @@ app.get('/franco', function(req, res) {
 });
 
 
+app.get('/phonegap-poc-twilio-token', function(req, res){
+    // Create an object which will generate a capability token
+    // Replace these two arguments with your own account SID
+    // and auth token:
+    var capability = new twilio.Capability(
+        'AC6709b7b53472500fd933c6d406a75308',
+        'd155ed1252ce27017bf4839f9db3e1ab'
+        //process.env.TWILIO_ACCOUNT_SID,
+        //process.env.TWILIO_AUTH_TOKEN
+    );
+
+    // Give the capability generator permission to accept incoming
+    // calls to the ID "kevin"
+    capability.allowClientIncoming('franco');
+ 
+    // Give the capability generator permission to make outbound calls,
+    // Using the following TwiML app to request call handling instructions:
+    capability.allowClientOutgoing('AP6e9196835379d10360863a1f031b9b3b');
+
+    var token = capability.generate();
+
+    res.send({twilioToken: token});
+});
+
+
 var port = process.env.PORT || 1337;
 app.listen(port, function() {
   console.log("Listening on " + port);
